@@ -13,7 +13,7 @@ certifi==2024.2.2
 charset-normalizer==3.3.2
 chex==0.1.85
 click==8.1.7
-etils==1.7.0
+etils==1.6.0
 exceptiongroup==1.2.0
 filelock==3.13.1
 flax==0.8.1
