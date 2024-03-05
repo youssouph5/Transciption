@@ -83,6 +83,7 @@ def main():
         if transcript is not None:
             # Bouton "Transcription"
             if button_col1.button("Transcription"):
+                transcript = transcribe_audio(audio_path)
                 for utterance in transcript.utterances:
                     st.write(f"<span style='color: #922B21;'>Speaker {utterance.speaker}:</span> {utterance.text}", unsafe_allow_html=True)
                     
