@@ -3,6 +3,7 @@ import assemblyai as aai
 from transformers import pipeline
 import tempfile
 import openai
+from pydub import AudioSegment
 import io
 
 st.set_page_config(layout="wide")
