@@ -8,6 +8,10 @@ import openai
 st.set_page_config(layout="wide")
 
 aai.settings.api_key = st.sidebar.text_input('Veuillez insérer la clée fournie pour transcription', type='password')
+
+# Set up OpenAI API key
+openai.api_key = st.sidebar.text_input('Veuillez insérer la clée fournie pour démonstration', type='password')
+
 #aai.settings.api_key = "146c7980fa5a4b6c872033d97234500b"
 #@st.cache_resource
 def transcribe_audio(audio_path):
@@ -22,19 +26,16 @@ def transcribe_audio(audio_path):
     transcript = transcriber.transcribe(audio_path, config)
     return transcript
 
-sentiment_analysis = pipeline(
-  "sentiment-analysis",
-  framework="pt",
-  model="lxyuan/distilbert-base-multilingual-cased-sentiments-student" #SamLowe/roberta-base-go_emotions  #lxyuan/distilbert-base-multilingual-cased-sentiments-student
-)
 #@st.cache_resource
 def analyze_sentiment_voice(text):
+    sentiment_analysis = pipeline(
+      "sentiment-analysis",
+      framework="pt",
+      model="lxyuan/distilbert-base-multilingual-cased-sentiments-student" #SamLowe/roberta-base-go_emotions  #lxyuan/distilbert-base-multilingual-cased-sentiments-student
+    )
     results = sentiment_analysis(text)
     sentiment_label = results[0]['label']
     return sentiment_label
-
-# Set up OpenAI API key
-openai.api_key = st.sidebar.text_input('Veuillez insérer la clée fournie pour démonstration', type='password')
 
 #@st.cache_resource
 def analyze_emotion(text):
@@ -64,10 +65,9 @@ def main():
     st.sidebar.image("logo2.jpg", use_column_width=True)
 
     #option = st.sidebar.selectbox("Option ", ["Téléverser un fichier audio", "Utiliser le chemin du fichier audio"])
-
     #if option == "Téléverser un fichier audio":
         
-        # Ajouter un composant pour uploader un fichier audio
+    # Ajouter un composant pour uploader un fichier audio
     uploaded_file = st.file_uploader("Téléverser un fichier audio", type=["mp3", "wav"])
 
         # Créer une rangée pour les boutons "Transcription" et "Emotion"
