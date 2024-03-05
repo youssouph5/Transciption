@@ -5,13 +5,14 @@ import tempfile
 import openai
 import os
 
+# Configuration de la page Streamlit
+st.set_page_config(layout="wide")
+
 # Configuration des clés API
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 aai.settings.api_key = st.sidebar.text_input('Veuillez insérer la clée fournie pour transcription', type='password')
 openai.api_key = st.sidebar.text_input('Veuillez insérer la clée fournie pour démonstration', type='password')
 
-# Configuration de la page Streamlit
-st.set_page_config(layout="wide")
 st.sidebar.image("logo2.jpg", use_column_width=True)
 
 def transcribe_audio(audio_path):
