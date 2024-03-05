@@ -68,7 +68,7 @@ def main():
 
     #if option == "Téléverser un fichier audio":
         
-        # Ajouter un composant pour uploader un fichier audio
+    # Ajouter un composant pour uploader un fichier audio
     uploaded_file = st.file_uploader("Téléverser un fichier audio", type=["mp3", "wav"])
 
         # Créer une rangée pour les boutons "Transcription" et "Emotion"
@@ -76,7 +76,10 @@ def main():
 
         # Vérifier si un fichier a été uploadé
     if uploaded_file is not None:
-            # Créer un fichier temporaire pour enregistrer l'audio uploadé
+        audio_data = io.BytesIO(uploaded_file.read())
+        st.audio(audio_data, format='audio/wav')
+        
+        # Créer un fichier temporaire pour enregistrer l'audio uploadé
         with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
             tmp_file.write(uploaded_file.read())
             audio_path = tmp_file.name
@@ -114,12 +117,10 @@ def main():
                 sentiment0 = analyze_sentiment_voice(utterance.text)
                 st.write("Sentiment : ", sentiment0)
                  
-
     else:
             # Message indiquant à l'utilisateur d'uploader un fichier
         st.write("Veuillez uploader un fichier audio pour commencer la transcription.")     
             
-    
 
 if __name__ == "__main__":
     main()
