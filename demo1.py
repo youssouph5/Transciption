@@ -21,6 +21,12 @@ def transcribe_audio(audio_path):
     transcript = transcriber.transcribe(audio_path, config)
     return transcript
 
+sentiment_analysis = pipeline(
+  "sentiment-analysis",
+  framework="pt",
+  model="lxyuan/distilbert-base-multilingual-cased-sentiments-student" #SamLowe/roberta-base-go_emotions  #lxyuan/distilbert-base-multilingual-cased-sentiments-student
+)
+
 def analyze_sentiment_voice(text):
     results = sentiment_analysis(text)
     sentiment_label = results[0]['label']
