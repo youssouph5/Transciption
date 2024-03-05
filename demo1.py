@@ -111,7 +111,7 @@ def main():
                 st.write(f"<span style='color: blue;'>Speaker {utterance.speaker}:</span> {utterance.text}", unsafe_allow_html=True)
             
                     # Transcription de l'audio
-                sentiment0 = analyze_sentiment_voice(utterance.text)
+                sentiment0 = analyze_emotion(utterance.text)
                 st.write("Sentiment : ", sentiment0)
                  
     else:
