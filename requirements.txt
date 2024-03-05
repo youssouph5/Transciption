@@ -117,3 +117,4 @@ wavfile==4.7.1
 websockets==12.0
 yarl==1.9.4
 zipp==3.17.0
+audiosegment==0.23.0
