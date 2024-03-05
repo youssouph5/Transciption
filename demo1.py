@@ -74,14 +74,15 @@ def main():
         # Créer une rangée pour les boutons "Transcription" et "Emotion"
     button_col1, button_col2, button_col3 = st.columns(3)
 
-        # Vérifier si un fichier a été uploadé
+    # Vérifier si un fichier a été uploadé
     if uploaded_file is not None:
             # Créer un fichier temporaire pour enregistrer l'audio uploadé
         with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
             tmp_file.write(uploaded_file.read())
             audio_path = tmp_file.name
+        st.audio(open(audio_path, "rb").read(), format="audio/wav")
 
-            # Boutons pour la transcription et l'analyse de l'émotion
+        # Boutons pour la transcription et l'analyse de l'émotion
         if button_col1.button("Transcription") :
 
                 # Transcription de l'audio
