@@ -79,7 +79,7 @@ def main():
         with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
             tmp_file.write(uploaded_file.read())
             audio_path = tmp_file.name
-        st.audio(open(audio_path, "rb").read(), format="audio/wav")
+            st.audio(open(audio_path, "rb").read(), format="audio/wav")
 
         # Boutons pour la transcription et l'analyse de l'émotion
         if button_col1.button("Transcription") :
