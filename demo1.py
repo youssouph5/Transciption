@@ -7,12 +7,12 @@ import io
 
 st.set_page_config(layout="wide")
 
-aai.settings.api_key = st.sidebar.text_input('Veuillez insérer la clée fournie pour transcription', type='password')
+#aai.settings.api_key = st.sidebar.text_input('Veuillez insérer la clée fournie pour transcription', type='password')
 #aai.settings.api_key = "146c7980fa5a4b6c872033d97234500b"
 #@st.cache_resource
 def transcribe_audio(audio_path):
     # Configuration de l'API AssemblyAI
-    #aai.settings.api_key = "146c7980fa5a4b6c872033d97234500b"
+    aai.settings.api_key = "146c7980fa5a4b6c872033d97234500b"
 
     # Création d'un transcriber
     transcriber = aai.Transcriber()
@@ -73,9 +73,12 @@ def main():
     if uploaded_file is not None:
         audio_data = io.BytesIO(uploaded_file.read())
         st.audio(audio_data, format='audio/wav') 
+        with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+            tmp_file.write(uploaded_file.read())
+            audio_path = tmp_file.name
 
         # Transcription de l'audio
-        transcript = transcribe_audio(uploaded_file)
+        transcript = transcribe_audio(audio_path)
 
         if transcript is not None:
             # Bouton "Transcription"
