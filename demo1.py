@@ -14,7 +14,7 @@ aai.settings.api_key = st.sidebar.text_input('Veuillez insérer la clée fournie
 openai.api_key = st.sidebar.text_input('Veuillez insérer la clée fournie pour démonstration', type='password')
 
 st.sidebar.image("logo2.jpg", use_column_width=True)
-
+@st.cache
 def transcribe_audio(audio_path):
     transcriber = aai.Transcriber()
     config = aai.TranscriptionConfig(language_code="fr", speaker_labels=True, speakers_expected=2)
@@ -26,12 +26,12 @@ sentiment_analysis = pipeline(
   framework="pt",
   model="lxyuan/distilbert-base-multilingual-cased-sentiments-student" #SamLowe/roberta-base-go_emotions  #lxyuan/distilbert-base-multilingual-cased-sentiments-student
 )
-
+@st.cache
 def analyze_sentiment_voice(text):
     results = sentiment_analysis(text)
     sentiment_label = results[0]['label']
     return sentiment_label
-
+@st.cache
 def analyze_emotion(text):
    try:
        content = f"Please analyze the following text to detect the underlying emotion. Return the detected emotion in French (e.g., 'Neutre', 'Frustration', 'Colère', etc.). If no specific emotion is detected, please respond with 'Neutre'. The text for analysis is: \n{text}"
@@ -47,7 +47,7 @@ def analyze_emotion(text):
    except Exception as e:
        st.error(f"Erreur lors de l'analyse de l'émotion : {e}")
        return None
-
+@st.cache
 def display_transcription(transcript):
     for utterance in transcript.utterances:
         st.write(f"<span style='color: #922B21;'>Speaker {utterance.speaker}:</span> {utterance.text}", unsafe_allow_html=True)
