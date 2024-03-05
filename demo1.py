@@ -3,6 +3,9 @@ import assemblyai as aai
 from transformers import pipeline
 import tempfile
 import openai
+import os
+
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 st.set_page_config(layout="wide")
 
