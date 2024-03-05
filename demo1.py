@@ -75,7 +75,7 @@ def main():
         st.audio(audio_data, format='audio/wav') 
 
         # Transcription de l'audio
-        transcript = transcribe_audio(audio_path)
+        transcript = transcribe_audio(uploaded_file)
 
         if transcript is not None:
             # Bouton "Transcription"
